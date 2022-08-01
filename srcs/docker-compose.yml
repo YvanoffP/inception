@@ -1,0 +1,28 @@
+---
+
+        version: "3"
+
+        services:
+                nginx:
+                        build: ./requirements/nginx
+                        ports:
+                                - 9000:9000
+                        env_file:
+                                - .env
+                        restart: always
+
+                mariadb:
+                        build: ./requirements/mariadb
+                        ports:
+                                - 3306:3306
+                        env_file:
+                                - .env
+                        restart: always
+
+                wordpress:
+                        build: ./requirements/wordpress
+                        ports:
+                                - 3306:9000
+                        env_file:
+                                - .env
+                        restart: always
