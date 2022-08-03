@@ -1,5 +1,4 @@
 ---
-
         version: "3"
 
         services:
@@ -8,7 +7,7 @@
                         build: 
                                 context: requirements/nginx
                         ports:
-                                - 9000:9000
+                                - 443:443
                         env_file:
                                 - .env
                         depends_on:
@@ -21,30 +20,45 @@
                 mariadb:
                         build:
                                 context: requirements/mariadb
-                        ports:
-                                - 3306:3306
                         env_file:
                                 - .env
                         networks:
                                 - inception
+                        expose:
+                                - "9000"
+                        volumes:
+                                - mariadb_data:/var/lib/mysql
                         restart: always
 
 #----------------------------WORDPRESS-----------------------------------#
                 wordpress:
                         build:
                                 context: requirements/wordpress
-                        ports:
-                                - 3306:9000
                         env_file:
                                 - .env
                         depends_on:
                                 - mariadb
                         networks:
                                 - inception
+                        expose:
+                                - "9000"
+                        volumes:
+                                - wp_data:/var/www/html
                         restart: always
 
 #----------------------------VOLUMES-------------------------------------#
-                #volumes:
+                volumes:
+                        data_mariadb:
+                                driver_opts:
+                                        type: "none"
+                                        o: "bind"
+                                        device: "~/data/mariadb_data"
+
+                        wp-content:
+                                driver_opts:
+                                        type: "none"
+                                        o: "bind"
+                                        device: "~/data/wp_data"
 
 #----------------------------NETWORKS--0---------------------------------#
                 networks:
