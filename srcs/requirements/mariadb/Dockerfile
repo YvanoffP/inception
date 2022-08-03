@@ -1,8 +1,14 @@
-FROM mariadb:latest
+FROM debian:buster
 
-WORKDIR ./mariadb
-
-COPY maria_conf.txt maria_conf.txt
-RUN echo mama
+RUN apt-get update && apt-get install -y mariadb-server
 
 EXPOSE 3306
+
+COPY conf/mariadb_server.cnf /etc/mysql/mariadb_server.cnf
+
+# Here we have to run script
+
+COPY script/script_user.sh
+RUN bash ./script_user.sh
+
+CMD
