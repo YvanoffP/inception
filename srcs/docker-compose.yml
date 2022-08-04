@@ -4,8 +4,9 @@
         services:
 #----------------------------NGINX---------------------------------------#
                 nginx:
+                        container_name: nginx
                         build: 
-                                context: requirements/nginx
+                                context: ./requirements/nginx
                         ports:
                                 - 443:443
                         env_file:
@@ -18,8 +19,9 @@
 
 #----------------------------MARIADB-------------------------------------#
                 mariadb:
+                        container_name: mariadb
                         build:
-                                context: requirements/mariadb
+                                context: ./requirements/mariadb
                         env_file:
                                 - .env
                         networks:
@@ -32,8 +34,9 @@
 
 #----------------------------WORDPRESS-----------------------------------#
                 wordpress:
+                        container_name: wordpress
                         build:
-                                context: requirements/wordpress
+                                context: ./requirements/wordpress
                         env_file:
                                 - .env
                         depends_on:
@@ -43,25 +46,24 @@
                         expose:
                                 - "9000"
                         volumes:
-                                - wp_data:/var/www/html
+                                - wp_data:/var/www/html/wordpress
                         restart: always
 
 #----------------------------VOLUMES-------------------------------------#
-                volumes:
-                        data_mariadb:
-                                driver_opts:
-                                        type: "none"
-                                        o: "bind"
-                                        device: "~/data/mariadb_data"
+        volumes:
+                mariadb_data:
+                        driver_opts:
+                                type: "none"
+                                o: "bind"
+                                device: "/home/$USER/data/mariadb_data"
 
-                        wp-content:
-                                driver_opts:
-                                        type: "none"
-                                        o: "bind"
-                                        device: "~/data/wp_data"
+                wp_data:
+                        driver_opts:
+                                type: "none"
+                                o: "bind"
+                                device: "/home/$USER/data/wp_data"
 
 #----------------------------NETWORKS--0---------------------------------#
-                networks:
-                        inception:
-                                name: inception
-                                driver: bridge
+        networks:
+                inception:
+                        driver: bridge
