@@ -1,6 +1,6 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get install -y mariadb-server
+RUN apt-get update && apt-get install -y mariadb-server 
 
 # Describes some variables. This image will be independant from docker-compose file
 # Future container will not get those variable (ARG is used, not ENV who pass variables to future container) if container is build without docker-compose
@@ -12,12 +12,19 @@ ARG DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
 # Exposes port only to the other docker containers, not to host
 EXPOSE 3306
 
-COPY conf/mariadb-server.cnf /etc/mysql/my.cnf
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d
 
 # Here we run script
-COPY tools/entrypoint.sh /
-RUN bash ./entrypoint.sh
+COPY tools/docker-entrypoint.sh /
+RUN bash ./docker-entrypoint.sh
 
-RUN rm entrypoint.sh
+RUN rm docker-entrypoint.sh
 
-CMD ["mysqld_safe"]
+CMD ["mysqld_safe"] 
+
+# Connect to DB :
+
+# sudo docker exec -it mariadb mariadb --user ypetruzz -p root
+# SHOW DATABASES;
+# USE wordpress;
+# SHOW TABLES
