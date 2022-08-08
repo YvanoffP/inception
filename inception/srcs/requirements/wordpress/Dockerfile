@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
 	mariadb-client \
 	php7.3-fpm \
 	php7.3-mysql \
+	less \
 	curl
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
@@ -22,5 +23,6 @@ COPY wp-config.php /var/www/wp-config.php
 
 COPY ./tools/entrypoint.sh /var/www/wordpress/entrypoint.sh
 RUN chmod +x /var/www/wordpress/entrypoint.sh
+
 
 CMD ["bash", "/var/www/wordpress/entrypoint.sh"]
