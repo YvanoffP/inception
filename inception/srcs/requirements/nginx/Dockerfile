@@ -2,9 +2,11 @@ FROM debian:buster
 
 RUN apt-get -y update && apt-get -y install \
 	nginx \
+	net-tools \
 	openssl
 
 COPY conf/nginx.conf /etc/nginx/sites-available/default
+COPY conf/nginx.conf /etc/nginx/sites-enabled/defaultt
 
 RUN openssl req -x509 -days 365\
 	-newkey rsa:2048 -nodes \

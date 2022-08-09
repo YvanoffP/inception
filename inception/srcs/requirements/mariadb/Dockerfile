@@ -25,7 +25,8 @@ CMD ["/usr/bin/mysqld_safe"]
 
 # Connect to DB :
 
-# sudo docker exec -it mariadb mariadb --user tpauvret -p root
+# sudo docker exec -it mariadb sh
+# mysql -uypetruzz -p
 # SHOW DATABASES;
 # USE wordpress;
 # SHOW TABLES
