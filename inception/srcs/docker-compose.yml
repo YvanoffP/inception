@@ -18,6 +18,8 @@ services:
             - wordpress
             - mariadb
         restart: on-failure
+        volumes:
+            - wp_data:/var/www/wordpress
 
 
 #-------------------WORDPRESS---------------------#
