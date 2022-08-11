@@ -14,6 +14,6 @@ RUN openssl req -x509 -days 365\
 	-out /etc/ssl/certs/nginx.crt \
 	-sha256 -subj "/CN=ypetruzz.42.fr"
 
-EXPOSE 443/tcp
+EXPOSE 443
 
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

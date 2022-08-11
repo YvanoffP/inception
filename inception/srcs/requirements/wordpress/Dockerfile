@@ -26,6 +26,4 @@ RUN chmod 644 /var/www/wordpress/wp-config.php
 COPY ./tools/entrypoint.sh /var/www/wordpress/entrypoint.sh
 RUN chmod +x /var/www/wordpress/entrypoint.sh
 
-COPY conf/index.html /var/www/
-
 CMD ["bash", "/var/www/wordpress/entrypoint.sh"]
