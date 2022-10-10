@@ -86,7 +86,7 @@ else
     echo "${BLUE}docker-compose${RED} already Installed${RESET}"
 fi
 
-sudo sed -i "s/localhost/tpauvret.42.fr/g" /etc/hosts
+sudo sed -i "s/localhost/ypetruzz.42.fr/g" /etc/hosts
 
 echo -e "${RED}╔════════════════════════════║NOTE:║════════════════════════╗${RESET}"
 echo -e "${RED}║   ${BLUE} Please Restart Your machine To apply Those changes!${RED}    ║${RESET}"
