@@ -15,8 +15,8 @@ all:	build up
 
 build:
 	@echo "$(GREEN)██████████████████████████ BUILDING.. ███████████████████████████$(RESET)"
-	@mkdir -p /home/$(USER)/data/mariadb_data
-	@mkdir -p /home/$(USER)/data/wp_data
+	@mkdir -p /Users/$(USER)/data/mariadb_data
+	@mkdir -p /Users/$(USER)/data/wp_data
 	${COMPOSE} build --no-cache
 
 up:
@@ -63,10 +63,10 @@ clean:
 
 fclean: clean
 	@echo "$(GREEN)██████████████████████████ REMOVE VOLUMES ███████████████████████████$(RESET)"
-	@rm -rf /home/$(USER)/data/mariadb_data
-	echo "Successfully removed MariaDB volume in /home/$(USER)/data/mariadb_data"
-	@rm -rf /home/$(USER)/data/wp_data
-	echo "Successfully removed Wordpress volume in /home/$(USER)/data/wp_data"
+	@rm -rf /Users/$(USER)/data/mariadb_data
+	echo "Successfully removed MariaDB volume in /Users/$(USER)/data/mariadb_data"
+	@rm -rf /Users/$(USER)/data/wp_data
+	echo "Successfully removed Wordpress volume in /Users/$(USER)/data/wp_data"
 	@echo "$(GREEN)████████████████████████ EVERYTHING IS CLEAR ████████████████████████$(RESET)"
 
 re:	fclean all
